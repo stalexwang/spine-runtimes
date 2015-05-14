@@ -35,26 +35,30 @@ using UnityEngine;
 using Spine;
 
 /// <summary>Loads and stores a Spine atlas and list of materials.</summary>
-public class AtlasAsset : ScriptableObject {
+public class AtlasAsset : ScriptableObject
+{
 	public TextAsset atlasFile;
 	public Material[] materials;
+	public TextAsset[] webpTextures;
 	private Atlas atlas;
 
-	public void Reset () {
+	public void Reset ()
+	{
 		atlas = null;
 	}
 
 	/// <returns>The atlas or null if it could not be loaded.</returns>
-	public Atlas GetAtlas () {
+	public Atlas GetAtlas ()
+	{
 		if (atlasFile == null) {
-			Debug.LogError("Atlas file not set for atlas asset: " + name, this);
-			Reset();
+			Debug.LogError ("Atlas file not set for atlas asset: " + name, this);
+			Reset ();
 			return null;
 		}
 
 		if (materials == null || materials.Length == 0) {
-			Debug.LogError("Materials not set for atlas asset: " + name, this);
-			Reset();
+			Debug.LogError ("Materials not set for atlas asset: " + name, this);
+			Reset ();
 			return null;
 		}
 
@@ -62,17 +66,26 @@ public class AtlasAsset : ScriptableObject {
 			return atlas;
 
 		try {
-			atlas = new Atlas(new StringReader(atlasFile.text), "", new MaterialsTextureLoader(this));
-			atlas.FlipV();
+			TextureLoader texLoader = null;
+
+			if (webpTextures.Length > 0) {
+				texLoader = new WebPTextureLoader (this);
+			} else {
+				texLoader = new MaterialsTextureLoader (this);
+			}
+
+			atlas = new Atlas (new StringReader (atlasFile.text), "", texLoader);
+			atlas.FlipV ();
 			return atlas;
 		} catch (Exception ex) {
-			Debug.LogError("Error reading atlas file for atlas asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
+			Debug.LogError ("Error reading atlas file for atlas asset: " + name + "\n" + ex.Message + "\n" + ex.StackTrace, this);
 			return null;
 		}
 	}
 
-	public Sprite GenerateSprite (string name, out Material material) {
-		AtlasRegion region = atlas.FindRegion(name);
+	public Sprite GenerateSprite (string name, out Material material)
+	{
+		AtlasRegion region = atlas.FindRegion (name);
 
 		Sprite sprite = null;
 		material = null;
@@ -84,18 +97,19 @@ public class AtlasAsset : ScriptableObject {
 		return sprite;
 	}
 
-	public Mesh GenerateMesh(string name, Mesh mesh, out Material material, float scale = 0.01f){
-		AtlasRegion region = atlas.FindRegion(name);
+	public Mesh GenerateMesh (string name, Mesh mesh, out Material material, float scale = 0.01f)
+	{
+		AtlasRegion region = atlas.FindRegion (name);
 		material = null;
 		if (region != null) {
 			if (mesh == null) {
-				mesh = new Mesh();
+				mesh = new Mesh ();
 				mesh.name = name;
 			}
 				
 			Vector3[] verts = new Vector3[4];
 			Vector2[] uvs = new Vector2[4];
-			Color[] colors = new Color[4]{Color.white, Color.white, Color.white, Color.white};
+			Color[] colors = new Color[4]{ Color.white, Color.white, Color.white, Color.white };
 			int[] triangles = new int[6] { 0, 1, 2, 2, 3, 0 };
 
 			float left, right, top, bottom;
@@ -104,10 +118,10 @@ public class AtlasAsset : ScriptableObject {
 			top = region.height / 2f;
 			bottom = top * -1;
 
-			verts[0] = new Vector3(left, bottom, 0) * scale;
-			verts[1] = new Vector3(left, top, 0) * scale;
-			verts[2] = new Vector3(right, top, 0) * scale;
-			verts[3] = new Vector3(right, bottom, 0) * scale;
+			verts [0] = new Vector3 (left, bottom, 0) * scale;
+			verts [1] = new Vector3 (left, top, 0) * scale;
+			verts [2] = new Vector3 (right, top, 0) * scale;
+			verts [3] = new Vector3 (right, bottom, 0) * scale;
 			float u, v, u2, v2;
 			u = region.u;
 			v = region.v;
@@ -115,15 +129,15 @@ public class AtlasAsset : ScriptableObject {
 			v2 = region.v2;
 
 			if (!region.rotate) {
-				uvs[0] = new Vector2(u, v2);
-				uvs[1] = new Vector2(u, v);
-				uvs[2] = new Vector2(u2, v);
-				uvs[3] = new Vector2(u2, v2);	
+				uvs [0] = new Vector2 (u, v2);
+				uvs [1] = new Vector2 (u, v);
+				uvs [2] = new Vector2 (u2, v);
+				uvs [3] = new Vector2 (u2, v2);	
 			} else {
-				uvs[0] = new Vector2(u2, v2);
-				uvs[1] = new Vector2(u, v2);
-				uvs[2] = new Vector2(u, v);
-				uvs[3] = new Vector2(u2, v);
+				uvs [0] = new Vector2 (u2, v2);
+				uvs [1] = new Vector2 (u, v2);
+				uvs [2] = new Vector2 (u, v);
+				uvs [3] = new Vector2 (u2, v);
 			}
 
 			mesh.triangles = new int[0];
@@ -131,8 +145,8 @@ public class AtlasAsset : ScriptableObject {
 			mesh.uv = uvs;
 			mesh.colors = colors;
 			mesh.triangles = triangles;
-			mesh.RecalculateNormals();
-			mesh.RecalculateBounds();
+			mesh.RecalculateNormals ();
+			mesh.RecalculateBounds ();
 
 			material = (Material)region.page.rendererObject;
 		} else {
@@ -143,19 +157,22 @@ public class AtlasAsset : ScriptableObject {
 	}
 }
 
-public class MaterialsTextureLoader : TextureLoader {
+public class MaterialsTextureLoader : TextureLoader
+{
 	AtlasAsset atlasAsset;
-	
-	public MaterialsTextureLoader (AtlasAsset atlasAsset) {
+
+	public MaterialsTextureLoader (AtlasAsset atlasAsset)
+	{
 		this.atlasAsset = atlasAsset;
 	}
-	
-	public void Load (AtlasPage page, String path) {
-		String name = Path.GetFileNameWithoutExtension(path);
+
+	public void Load (AtlasPage page, String path)
+	{
+		String name = Path.GetFileNameWithoutExtension (path);
 		Material material = null;
 		foreach (Material other in atlasAsset.materials) {
 			if (other.mainTexture == null) {
-				Debug.LogError("Material is missing texture: " + other.name, other);
+				Debug.LogError ("Material is missing texture: " + other.name, other);
 				return;
 			}
 			if (other.mainTexture.name == name) {
@@ -164,7 +181,7 @@ public class MaterialsTextureLoader : TextureLoader {
 			}
 		}
 		if (material == null) {
-			Debug.LogError("Material with texture name \"" + name + "\" not found for atlas asset: " + atlasAsset.name, atlasAsset);
+			Debug.LogError ("Material with texture name \"" + name + "\" not found for atlas asset: " + atlasAsset.name, atlasAsset);
 			return;
 		}
 		page.rendererObject = material;
@@ -176,6 +193,45 @@ public class MaterialsTextureLoader : TextureLoader {
 		}
 	}
 
-	public void Unload (object texture) {
+	public void Unload (object texture)
+	{
 	}
+}
+
+public class WebPTextureLoader : TextureLoader
+{
+	AtlasAsset atlasAsset;
+
+	public WebPTextureLoader (AtlasAsset atlasAsset)
+	{
+		this.atlasAsset = atlasAsset;
+	}
+
+	#region TextureLoader implementation
+
+	public void Load (AtlasPage page, string path)
+	{
+		String name = Path.GetFileNameWithoutExtension (path);
+		Material material = null;
+
+		foreach (Material other in atlasAsset.materials) {
+			if (other.name == name) {
+				material = other;
+				break;
+			}
+		}
+
+		if (material == null) {
+			Debug.LogError ("Material with texture name \"" + name + "\" not found for atlas asset: " + atlasAsset.name, atlasAsset);
+			return;
+		}
+
+		page.rendererObject = material;
+	}
+
+	public void Unload (object texture)
+	{
+	}
+
+	#endregion
 }

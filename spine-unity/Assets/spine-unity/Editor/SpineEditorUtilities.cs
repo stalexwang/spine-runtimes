@@ -46,9 +46,11 @@ using System.Reflection;
 using Spine;
 
 [InitializeOnLoad]
-public class SpineEditorUtilities : AssetPostprocessor {
+public class SpineEditorUtilities : AssetPostprocessor
+{
 
-	public static class Icons {
+	public static class Icons
+	{
 		public static Texture2D skeleton;
 		public static Texture2D nullBone;
 		public static Texture2D bone;
@@ -78,17 +80,17 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		public static Mesh boneMesh {
 			get {
 				if (_boneMesh == null) {
-					_boneMesh = new Mesh();
+					_boneMesh = new Mesh ();
 					_boneMesh.vertices = new Vector3[4] {
 						Vector3.zero,
-						new Vector3(-0.1f, 0.1f, 0),
+						new Vector3 (-0.1f, 0.1f, 0),
 						Vector3.up,
-						new Vector3(0.1f, 0.1f, 0)
+						new Vector3 (0.1f, 0.1f, 0)
 					};
 					_boneMesh.uv = new Vector2[4];
 					_boneMesh.triangles = new int[6] { 0, 1, 2, 2, 3, 0 };
-					_boneMesh.RecalculateBounds();
-					_boneMesh.RecalculateNormals();
+					_boneMesh.RecalculateBounds ();
+					_boneMesh.RecalculateNormals ();
 				}
 
 				return _boneMesh;
@@ -104,8 +106,8 @@ public class SpineEditorUtilities : AssetPostprocessor {
 					_boneMaterial = new Material(Shader.Find("Particles/Alpha Blended"));
 					_boneMaterial.SetColor("_TintColor", new Color(0.4f, 0.4f, 0.4f, 0.25f));
 #else
-					_boneMaterial = new Material(Shader.Find("Spine/Bones"));
-					_boneMaterial.SetColor("_Color", new Color(0.4f, 0.4f, 0.4f, 0.25f));
+					_boneMaterial = new Material (Shader.Find ("Spine/Bones"));
+					_boneMaterial.SetColor ("_Color", new Color (0.4f, 0.4f, 0.4f, 0.25f));
 #endif
 
 				}
@@ -116,34 +118,35 @@ public class SpineEditorUtilities : AssetPostprocessor {
 
 		internal static Material _boneMaterial;
 
-		public static void Initialize () {
-			skeleton = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-skeleton.png");
-			nullBone = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-null.png");
-			bone = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-bone.png");
-			poseBones = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-poseBones.png");
-			boneNib = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-boneNib.png");
-			slot = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-slot.png");
-			slotRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-slotRoot.png");
-			skinPlaceholder = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-skinPlaceholder.png");
-			image = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-image.png");
-			boundingBox = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-boundingBox.png");
-			mesh = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-mesh.png");
-			weights = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-weights.png");
-			skin = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-skinPlaceholder.png");
-			skinsRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-skinsRoot.png");
-			animation = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-animation.png");
-			animationRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-animationRoot.png");
-			spine = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-spine.png");
-			_event = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-event.png");
-			constraintNib = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-constraintNib.png");
-			warning = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-warning.png");
-			skeletonUtility = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-skeletonUtility.png");
-			hingeChain = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-hingeChain.png");
-			subMeshRenderer = (Texture2D)AssetDatabase.LoadMainAssetAtPath(SpineEditorUtilities.editorGUIPath + "/icon-subMeshRenderer.png");
+		public static void Initialize ()
+		{
+			skeleton = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-skeleton.png");
+			nullBone = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-null.png");
+			bone = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-bone.png");
+			poseBones = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-poseBones.png");
+			boneNib = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-boneNib.png");
+			slot = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-slot.png");
+			slotRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-slotRoot.png");
+			skinPlaceholder = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-skinPlaceholder.png");
+			image = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-image.png");
+			boundingBox = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-boundingBox.png");
+			mesh = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-mesh.png");
+			weights = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-weights.png");
+			skin = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-skinPlaceholder.png");
+			skinsRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-skinsRoot.png");
+			animation = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-animation.png");
+			animationRoot = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-animationRoot.png");
+			spine = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-spine.png");
+			_event = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-event.png");
+			constraintNib = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-constraintNib.png");
+			warning = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-warning.png");
+			skeletonUtility = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-skeletonUtility.png");
+			hingeChain = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-hingeChain.png");
+			subMeshRenderer = (Texture2D)AssetDatabase.LoadMainAssetAtPath (SpineEditorUtilities.editorGUIPath + "/icon-subMeshRenderer.png");
 
-			unityIcon = EditorGUIUtility.FindTexture("SceneAsset Icon");
+			unityIcon = EditorGUIUtility.FindTexture ("SceneAsset Icon");
 
-			controllerIcon = EditorGUIUtility.FindTexture("AnimatorController Icon");
+			controllerIcon = EditorGUIUtility.FindTexture ("AnimatorController Icon");
 		}
 	}
 
@@ -154,72 +157,77 @@ public class SpineEditorUtilities : AssetPostprocessor {
 	static Dictionary<int, BoundingBoxFollower> boundingBoxFollowerTable;
 	public static float defaultScale = 0.01f;
 	public static float defaultMix = 0.2f;
-	public static string defaultShader = "Spine/Skeleton";
+	public static string defaultShader = "Sprites/Diffuse";
 	public static bool initialized;
 
 	const string DEFAULT_MIX_KEY = "SPINE_DEFAULT_MIX";
 
-	static SpineEditorUtilities () {
-		Initialize();
+	static SpineEditorUtilities ()
+	{
+		Initialize ();
 	}
 
-	static void Initialize () {
-		defaultMix = EditorPrefs.GetFloat(DEFAULT_MIX_KEY, 0.2f);
+	static void Initialize ()
+	{
+		defaultMix = EditorPrefs.GetFloat (DEFAULT_MIX_KEY, 0.2f);
 
-		DirectoryInfo rootDir = new DirectoryInfo(Application.dataPath);
-		FileInfo[] files = rootDir.GetFiles("SpineEditorUtilities.cs", SearchOption.AllDirectories);
-		editorPath = Path.GetDirectoryName(files[0].FullName.Replace("\\", "/").Replace(Application.dataPath, "Assets"));
+		DirectoryInfo rootDir = new DirectoryInfo (Application.dataPath);
+		FileInfo[] files = rootDir.GetFiles ("SpineEditorUtilities.cs", SearchOption.AllDirectories);
+		editorPath = Path.GetDirectoryName (files [0].FullName.Replace ("\\", "/").Replace (Application.dataPath, "Assets"));
 		editorGUIPath = editorPath + "/GUI";
 
-		Icons.Initialize();
+		Icons.Initialize ();
 
-		skeletonRendererTable = new Dictionary<int, GameObject>();
-		skeletonUtilityBoneTable = new Dictionary<int, SkeletonUtilityBone>();
-		boundingBoxFollowerTable = new Dictionary<int, BoundingBoxFollower>();
+		skeletonRendererTable = new Dictionary<int, GameObject> ();
+		skeletonUtilityBoneTable = new Dictionary<int, SkeletonUtilityBone> ();
+		boundingBoxFollowerTable = new Dictionary<int, BoundingBoxFollower> ();
 
 		EditorApplication.hierarchyWindowChanged += HierarchyWindowChanged;
 		EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
 
-		HierarchyWindowChanged();
+		HierarchyWindowChanged ();
 		initialized = true;
 	}
 
-	public static void ConfirmInitialization () {
+	public static void ConfirmInitialization ()
+	{
 		if (!initialized || Icons.skeleton == null)
-			Initialize();
+			Initialize ();
 	}
 
-	static void HierarchyWindowChanged () {
-		skeletonRendererTable.Clear();
-		skeletonUtilityBoneTable.Clear();
-		boundingBoxFollowerTable.Clear();
+	static void HierarchyWindowChanged ()
+	{
+		skeletonRendererTable.Clear ();
+		skeletonUtilityBoneTable.Clear ();
+		boundingBoxFollowerTable.Clear ();
 
-		SkeletonRenderer[] arr = Object.FindObjectsOfType<SkeletonRenderer>();
+		SkeletonRenderer[] arr = Object.FindObjectsOfType<SkeletonRenderer> ();
 		foreach (SkeletonRenderer r in arr)
-			skeletonRendererTable.Add(r.gameObject.GetInstanceID(), r.gameObject);
+			skeletonRendererTable.Add (r.gameObject.GetInstanceID (), r.gameObject);
 
-		SkeletonUtilityBone[] boneArr = Object.FindObjectsOfType<SkeletonUtilityBone>();
+		SkeletonUtilityBone[] boneArr = Object.FindObjectsOfType<SkeletonUtilityBone> ();
 		foreach (SkeletonUtilityBone b in boneArr)
-			skeletonUtilityBoneTable.Add(b.gameObject.GetInstanceID(), b);
+			skeletonUtilityBoneTable.Add (b.gameObject.GetInstanceID (), b);
 
-		BoundingBoxFollower[] bbfArr = Object.FindObjectsOfType<BoundingBoxFollower>();
+		BoundingBoxFollower[] bbfArr = Object.FindObjectsOfType<BoundingBoxFollower> ();
 		foreach (BoundingBoxFollower bbf in bbfArr)
-			boundingBoxFollowerTable.Add(bbf.gameObject.GetInstanceID(), bbf);
+			boundingBoxFollowerTable.Add (bbf.gameObject.GetInstanceID (), bbf);
 	}
 
-	static void HierarchyWindowItemOnGUI (int instanceId, Rect selectionRect) {
-		if (skeletonRendererTable.ContainsKey(instanceId)) {
-			Rect r = new Rect(selectionRect);
+	static void HierarchyWindowItemOnGUI (int instanceId, Rect selectionRect)
+	{
+		if (skeletonRendererTable.ContainsKey (instanceId)) {
+			Rect r = new Rect (selectionRect);
 			r.x = r.width - 15;
 			r.width = 15;
 
-			GUI.Label(r, Icons.spine);
-		} else if (skeletonUtilityBoneTable.ContainsKey(instanceId)) {
-			Rect r = new Rect(selectionRect);
+			GUI.Label (r, Icons.spine);
+		} else if (skeletonUtilityBoneTable.ContainsKey (instanceId)) {
+			Rect r = new Rect (selectionRect);
 			r.x -= 26;
 
-			if (skeletonUtilityBoneTable[instanceId] != null) {
-				if (skeletonUtilityBoneTable[instanceId].transform.childCount == 0)
+			if (skeletonUtilityBoneTable [instanceId] != null) {
+				if (skeletonUtilityBoneTable [instanceId].transform.childCount == 0)
 					r.x += 13;
 
 				r.y += 2;
@@ -227,19 +235,19 @@ public class SpineEditorUtilities : AssetPostprocessor {
 				r.width = 13;
 				r.height = 13;
 
-				if (skeletonUtilityBoneTable[instanceId].mode == SkeletonUtilityBone.Mode.Follow) {
-					GUI.DrawTexture(r, Icons.bone);
+				if (skeletonUtilityBoneTable [instanceId].mode == SkeletonUtilityBone.Mode.Follow) {
+					GUI.DrawTexture (r, Icons.bone);
 				} else {
-					GUI.DrawTexture(r, Icons.poseBones);
+					GUI.DrawTexture (r, Icons.poseBones);
 				}
 			}
 
-		} else if (boundingBoxFollowerTable.ContainsKey(instanceId)) {
-			Rect r = new Rect(selectionRect);
+		} else if (boundingBoxFollowerTable.ContainsKey (instanceId)) {
+			Rect r = new Rect (selectionRect);
 			r.x -= 26;
 
-			if (boundingBoxFollowerTable[instanceId] != null) {
-				if (boundingBoxFollowerTable[instanceId].transform.childCount == 0)
+			if (boundingBoxFollowerTable [instanceId] != null) {
+				if (boundingBoxFollowerTable [instanceId].transform.childCount == 0)
 					r.x += 13;
 
 				r.y += 2;
@@ -247,110 +255,115 @@ public class SpineEditorUtilities : AssetPostprocessor {
 				r.width = 13;
 				r.height = 13;
 
-				GUI.DrawTexture(r, Icons.boundingBox);
+				GUI.DrawTexture (r, Icons.boundingBox);
 			}
 		}
 
 	}
 
-	static void OnPostprocessAllAssets (string[] imported, string[] deleted, string[] moved, string[] movedFromAssetPaths) {
-		ImportSpineContent(imported, false);
+	static void OnPostprocessAllAssets (string[] imported, string[] deleted, string[] moved, string[] movedFromAssetPaths)
+	{
+		ImportSpineContent (imported, false);
 	}
-	public static void ImportSpineContent (string[] imported, bool reimport = false) {
-		List<string> atlasPaths = new List<string>();
-		List<string> imagePaths = new List<string>();
-		List<string> skeletonPaths = new List<string>();
+
+	public static void ImportSpineContent (string[] imported, bool reimport = false)
+	{
+		List<string> atlasPaths = new List<string> ();
+		List<string> imagePaths = new List<string> ();
+		List<string> skeletonPaths = new List<string> ();
 
 		foreach (string str in imported) {
-			string extension = Path.GetExtension(str).ToLower();
+			string extension = Path.GetExtension (str).ToLower ();
 			switch (extension) {
-				case ".txt":
-					if (str.EndsWith(".atlas.txt")) {
-						atlasPaths.Add(str);
-					}
-					break;
-				case ".png":
-				case ".jpg":
-					imagePaths.Add(str);
-					break;
-				case ".json":
-					TextAsset spineDataFile = (TextAsset)AssetDatabase.LoadAssetAtPath(str, typeof(TextAsset));
-					if (IsValidSpineData(spineDataFile)) {
-						skeletonPaths.Add(str);
-					}
-					break;
+			case ".txt":
+				if (str.EndsWith (".atlas.txt")) {
+					atlasPaths.Add (str);
+				}
+				break;
+			case ".png":
+			case ".jpg":
+			case ".bytes"://support for WebP
+				if (str.EndsWith (".webp.bytes")) {
+					imagePaths.Add (str);
+				}
+				break;
+			case ".json":
+				TextAsset spineDataFile = (TextAsset)AssetDatabase.LoadAssetAtPath (str, typeof(TextAsset));
+				if (IsValidSpineData (spineDataFile)) {
+					skeletonPaths.Add (str);
+				}
+				break;
 			}
 		}
 
-
-		List<AtlasAsset> atlases = new List<AtlasAsset>();
+		List<AtlasAsset> atlases = new List<AtlasAsset> ();
 
 		//import atlases first
 		foreach (string ap in atlasPaths) {
-			if (!reimport && CheckForValidAtlas(ap))
+			if (!reimport && CheckForValidAtlas (ap))
 				continue;
 
-			TextAsset atlasText = (TextAsset)AssetDatabase.LoadAssetAtPath(ap, typeof(TextAsset));
-			AtlasAsset atlas = IngestSpineAtlas(atlasText);
-			atlases.Add(atlas);
+			TextAsset atlasText = (TextAsset)AssetDatabase.LoadAssetAtPath (ap, typeof(TextAsset));
+			AtlasAsset atlas = IngestSpineAtlas (atlasText);
+			atlases.Add (atlas);
 		}
 
 		//import skeletons and match them with atlases
 		bool abortSkeletonImport = false;
 		foreach (string sp in skeletonPaths) {
-			if (!reimport && CheckForValidSkeletonData(sp)) {
-				ResetExistingSkeletonData(sp);
+			if (!reimport && CheckForValidSkeletonData (sp)) {
+				ResetExistingSkeletonData (sp);
 				continue;
 			}
 
 
-			string dir = Path.GetDirectoryName(sp);
+			string dir = Path.GetDirectoryName (sp);
 
-			var localAtlases = FindAtlasesAtPath(dir);
-			var requiredPaths = GetRequiredAtlasRegions(sp);
-			var atlasMatch = GetMatchingAtlas(requiredPaths, localAtlases);
+			var localAtlases = FindAtlasesAtPath (dir);
+			var requiredPaths = GetRequiredAtlasRegions (sp);
+			var atlasMatch = GetMatchingAtlas (requiredPaths, localAtlases);
 
 			if (atlasMatch != null) {
-				IngestSpineProject(AssetDatabase.LoadAssetAtPath(sp, typeof(TextAsset)) as TextAsset, atlasMatch);
+				IngestSpineProject (AssetDatabase.LoadAssetAtPath (sp, typeof(TextAsset)) as TextAsset, atlasMatch);
 			} else {
 				bool resolved = false;
 				while (!resolved) {
-					int result = EditorUtility.DisplayDialogComplex("Skeleton JSON Import Error!", "Could not find matching AtlasAsset for " + Path.GetFileNameWithoutExtension(sp), "Select", "Skip", "Abort");
+					int result = EditorUtility.DisplayDialogComplex ("Skeleton JSON Import Error!", "Could not find matching AtlasAsset for " + Path.GetFileNameWithoutExtension (sp), "Select", "Skip", "Abort");
 					switch (result) {
-						case -1:
-							Debug.Log("Select Atlas");
-							AtlasAsset selectedAtlas = GetAtlasDialog(Path.GetDirectoryName(sp));
-							if (selectedAtlas != null) {
-								localAtlases.Clear();
-								localAtlases.Add(selectedAtlas);
-								atlasMatch = GetMatchingAtlas(requiredPaths, localAtlases);
-								if (atlasMatch != null) {
-									resolved = true;
-									IngestSpineProject(AssetDatabase.LoadAssetAtPath(sp, typeof(TextAsset)) as TextAsset, atlasMatch);
-								}
+					case -1:
+						Debug.Log ("Select Atlas");
+						AtlasAsset selectedAtlas = GetAtlasDialog (Path.GetDirectoryName (sp));
+						if (selectedAtlas != null) {
+							localAtlases.Clear ();
+							localAtlases.Add (selectedAtlas);
+							atlasMatch = GetMatchingAtlas (requiredPaths, localAtlases);
+							if (atlasMatch != null) {
+								resolved = true;
+								IngestSpineProject (AssetDatabase.LoadAssetAtPath (sp, typeof(TextAsset)) as TextAsset, atlasMatch);
 							}
+						}
 
-							break;
-						case 0:
-							var atlasList = MultiAtlasDialog(requiredPaths, Path.GetDirectoryName(sp), Path.GetFileNameWithoutExtension(sp));
+						break;
+					case 0:
+						var atlasList = MultiAtlasDialog (requiredPaths, Path.GetDirectoryName (sp), Path.GetFileNameWithoutExtension (sp));
 
-							if (atlasList != null)
-								IngestSpineProject(AssetDatabase.LoadAssetAtPath(sp, typeof(TextAsset)) as TextAsset, atlasList.ToArray());
+						if (atlasList != null)
+							IngestSpineProject (AssetDatabase.LoadAssetAtPath (sp, typeof(TextAsset)) as TextAsset, atlasList.ToArray ());
 
-							resolved = true;
-							break;
+						resolved = true;
+						break;
 
-						case 1:
-							Debug.Log("Skipped importing: " + Path.GetFileName(sp));
-							resolved = true;
-							break;
+					case 1:
+						Debug.Log ("Skipped importing: " + Path.GetFileName (sp));
+						resolved = true;
+						break;
 
 
-						case 2:
+					case 2:
 							//abort
-							abortSkeletonImport = true;
-							resolved = true;
-							break;
+						abortSkeletonImport = true;
+						resolved = true;
+						break;
 					}
 				}
 			}
@@ -362,17 +375,18 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		//TODO:  any post processing of images
 	}
 
-	static bool CheckForValidSkeletonData (string skeletonJSONPath) {
+	static bool CheckForValidSkeletonData (string skeletonJSONPath)
+	{
 
-		string dir = Path.GetDirectoryName(skeletonJSONPath);
-		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath(skeletonJSONPath, typeof(TextAsset));
-		DirectoryInfo dirInfo = new DirectoryInfo(dir);
+		string dir = Path.GetDirectoryName (skeletonJSONPath);
+		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath (skeletonJSONPath, typeof(TextAsset));
+		DirectoryInfo dirInfo = new DirectoryInfo (dir);
 
-		FileInfo[] files = dirInfo.GetFiles("*.asset");
+		FileInfo[] files = dirInfo.GetFiles ("*.asset");
 
 		foreach (var f in files) {
 			string localPath = dir + "/" + f.Name;
-			var obj = AssetDatabase.LoadAssetAtPath(localPath, typeof(Object));
+			var obj = AssetDatabase.LoadAssetAtPath (localPath, typeof(Object));
 			if (obj is SkeletonDataAsset) {
 				var skeletonDataAsset = (SkeletonDataAsset)obj;
 				if (skeletonDataAsset.skeletonJSON == textAsset)
@@ -383,17 +397,18 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		return false;
 	}
 
-	static void ResetExistingSkeletonData (string skeletonJSONPath) {
+	static void ResetExistingSkeletonData (string skeletonJSONPath)
+	{
 
-		string dir = Path.GetDirectoryName(skeletonJSONPath);
-		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath(skeletonJSONPath, typeof(TextAsset));
-		DirectoryInfo dirInfo = new DirectoryInfo(dir);
+		string dir = Path.GetDirectoryName (skeletonJSONPath);
+		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath (skeletonJSONPath, typeof(TextAsset));
+		DirectoryInfo dirInfo = new DirectoryInfo (dir);
 
-		FileInfo[] files = dirInfo.GetFiles("*.asset");
+		FileInfo[] files = dirInfo.GetFiles ("*.asset");
 
 		foreach (var f in files) {
 			string localPath = dir + "/" + f.Name;
-			var obj = AssetDatabase.LoadAssetAtPath(localPath, typeof(Object));
+			var obj = AssetDatabase.LoadAssetAtPath (localPath, typeof(Object));
 			if (obj is SkeletonDataAsset) {
 				var skeletonDataAsset = (SkeletonDataAsset)obj;
 
@@ -401,31 +416,33 @@ public class SpineEditorUtilities : AssetPostprocessor {
 					if (Selection.activeObject == skeletonDataAsset)
 						Selection.activeObject = null;
 
-					skeletonDataAsset.Reset();
+					skeletonDataAsset.Reset ();
 
-					string guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(skeletonDataAsset));
-					string lastHash = EditorPrefs.GetString(guid + "_hash");
+					string guid = AssetDatabase.AssetPathToGUID (AssetDatabase.GetAssetPath (skeletonDataAsset));
+					string lastHash = EditorPrefs.GetString (guid + "_hash");
 
-					if (lastHash != skeletonDataAsset.GetSkeletonData(true).Hash) {
+					if (lastHash != skeletonDataAsset.GetSkeletonData (true).Hash) {
 						//do any upkeep on synchronized assets
-						UpdateMecanimClips(skeletonDataAsset);
+						UpdateMecanimClips (skeletonDataAsset);
 					}
 
-					EditorPrefs.SetString(guid + "_hash", skeletonDataAsset.GetSkeletonData(true).Hash);
+					EditorPrefs.SetString (guid + "_hash", skeletonDataAsset.GetSkeletonData (true).Hash);
 				}
 			}
 		}
 	}
 
-	static void UpdateMecanimClips (SkeletonDataAsset skeletonDataAsset) {
+	static void UpdateMecanimClips (SkeletonDataAsset skeletonDataAsset)
+	{
 		if (skeletonDataAsset.controller == null)
 			return;
 
-		SkeletonBaker.GenerateMecanimAnimationClips(skeletonDataAsset);
+		SkeletonBaker.GenerateMecanimAnimationClips (skeletonDataAsset);
 	}
 
 
-	static bool CheckForValidAtlas (string atlasPath) {
+	static bool CheckForValidAtlas (string atlasPath)
+	{
 		return false;		
 		//////////////DEPRECATED - always check for new atlas data now
 		/*
@@ -473,33 +490,34 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		*/
 	}
 
-	static List<AtlasAsset> MultiAtlasDialog (List<string> requiredPaths, string initialDirectory, string header = "") {
+	static List<AtlasAsset> MultiAtlasDialog (List<string> requiredPaths, string initialDirectory, string header = "")
+	{
 
-		List<AtlasAsset> atlasAssets = new List<AtlasAsset>();
+		List<AtlasAsset> atlasAssets = new List<AtlasAsset> ();
 
 		bool resolved = false;
 		string lastAtlasPath = initialDirectory;
 		while (!resolved) {
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(header);
-			sb.AppendLine("Atlases:");
+			StringBuilder sb = new StringBuilder ();
+			sb.AppendLine (header);
+			sb.AppendLine ("Atlases:");
 			if (atlasAssets.Count == 0) {
-				sb.AppendLine("\t--none--");
+				sb.AppendLine ("\t--none--");
 			}
 			for (int i = 0; i < atlasAssets.Count; i++) {
-				sb.AppendLine("\t" + atlasAssets[i].name);
+				sb.AppendLine ("\t" + atlasAssets [i].name);
 			}
 
-			sb.AppendLine();
-			sb.AppendLine("Missing Regions:");
+			sb.AppendLine ();
+			sb.AppendLine ("Missing Regions:");
 
-			List<string> missingRegions = new List<string>(requiredPaths);
+			List<string> missingRegions = new List<string> (requiredPaths);
 
 			foreach (var atlasAsset in atlasAssets) {
-				var atlas = atlasAsset.GetAtlas();
+				var atlas = atlasAsset.GetAtlas ();
 				for (int i = 0; i < missingRegions.Count; i++) {
-					if (atlas.FindRegion(missingRegions[i]) != null) {
-						missingRegions.RemoveAt(i);
+					if (atlas.FindRegion (missingRegions [i]) != null) {
+						missingRegions.RemoveAt (i);
 						i--;
 					}
 				}
@@ -510,36 +528,36 @@ public class SpineEditorUtilities : AssetPostprocessor {
 			}
 
 			for (int i = 0; i < missingRegions.Count; i++) {
-				sb.AppendLine("\t" + missingRegions[i]);
+				sb.AppendLine ("\t" + missingRegions [i]);
 			}
 
-			int result = EditorUtility.DisplayDialogComplex("Atlas Selection", sb.ToString(), "Select", "Finish", "Abort");
+			int result = EditorUtility.DisplayDialogComplex ("Atlas Selection", sb.ToString (), "Select", "Finish", "Abort");
 
 			switch (result) {
-				case 0:
-					AtlasAsset selectedAtlasAsset = GetAtlasDialog(lastAtlasPath);
-					if (selectedAtlasAsset != null) {
-						var atlas = selectedAtlasAsset.GetAtlas();
-						bool hasValidRegion = false;
-						foreach (string str in missingRegions) {
-							if (atlas.FindRegion(str) != null) {
-								hasValidRegion = true;
-								break;
-							}
+			case 0:
+				AtlasAsset selectedAtlasAsset = GetAtlasDialog (lastAtlasPath);
+				if (selectedAtlasAsset != null) {
+					var atlas = selectedAtlasAsset.GetAtlas ();
+					bool hasValidRegion = false;
+					foreach (string str in missingRegions) {
+						if (atlas.FindRegion (str) != null) {
+							hasValidRegion = true;
+							break;
 						}
-
-						atlasAssets.Add(selectedAtlasAsset);
 					}
-					break;
 
-				case 1:
-					resolved = true;
-					break;
+					atlasAssets.Add (selectedAtlasAsset);
+				}
+				break;
 
-				case 2:
-					atlasAssets = null;
-					resolved = true;
-					break;
+			case 1:
+				resolved = true;
+				break;
+
+			case 2:
+				atlasAssets = null;
+				resolved = true;
+				break;
 			}
 
 
@@ -549,50 +567,53 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		return atlasAssets;
 	}
 
-	static AtlasAsset GetAtlasDialog (string dirPath) {
-		string path = EditorUtility.OpenFilePanel("Select AtlasAsset...", dirPath, "asset");
+	static AtlasAsset GetAtlasDialog (string dirPath)
+	{
+		string path = EditorUtility.OpenFilePanel ("Select AtlasAsset...", dirPath, "asset");
 		if (path == "")
 			return null;
 
 		int subLen = Application.dataPath.Length - 6;
-		string assetRelativePath = path.Substring(subLen, path.Length - subLen).Replace("\\", "/");
+		string assetRelativePath = path.Substring (subLen, path.Length - subLen).Replace ("\\", "/");
 
-		Object obj = AssetDatabase.LoadAssetAtPath(assetRelativePath, typeof(AtlasAsset));
+		Object obj = AssetDatabase.LoadAssetAtPath (assetRelativePath, typeof(AtlasAsset));
 
-		if (obj == null || obj.GetType() != typeof(AtlasAsset))
+		if (obj == null || obj.GetType () != typeof(AtlasAsset))
 			return null;
 
 		return (AtlasAsset)obj;
 	}
 
-	public static List<string> GetRequiredAtlasRegions (string jsonPath) {
-		List<string> requiredPaths = new List<string>();
+	public static List<string> GetRequiredAtlasRegions (string jsonPath)
+	{
+		List<string> requiredPaths = new List<string> ();
 
 		// FIXME - This doesn't work for a binary skeleton file!
-		if (jsonPath.Contains(".skel")) return requiredPaths;
+		if (jsonPath.Contains (".skel"))
+			return requiredPaths;
 
-		TextAsset spineJson = (TextAsset)AssetDatabase.LoadAssetAtPath(jsonPath, typeof(TextAsset));
+		TextAsset spineJson = (TextAsset)AssetDatabase.LoadAssetAtPath (jsonPath, typeof(TextAsset));
 
-		StringReader reader = new StringReader(spineJson.text);
-		var root = Json.Deserialize(reader) as Dictionary<string, object>;
+		StringReader reader = new StringReader (spineJson.text);
+		var root = Json.Deserialize (reader) as Dictionary<string, object>;
 
 		foreach (KeyValuePair<string, object> entry in (Dictionary<string, object>)root["skins"]) {
 			foreach (KeyValuePair<string, object> slotEntry in (Dictionary<string, object>)entry.Value) {
 
 				foreach (KeyValuePair<string, object> attachmentEntry in ((Dictionary<string, object>)slotEntry.Value)) {
 					var data = ((Dictionary<string, object>)attachmentEntry.Value);
-					if (data.ContainsKey("type")) {
-						if ((string)data["type"] == "boundingbox") {
+					if (data.ContainsKey ("type")) {
+						if ((string)data ["type"] == "boundingbox") {
 							continue;
 						}
 							
 					}
-					if (data.ContainsKey("path"))
-						requiredPaths.Add((string)data["path"]);
-					else if (data.ContainsKey("name"))
-						requiredPaths.Add((string)data["name"]);
+					if (data.ContainsKey ("path"))
+						requiredPaths.Add ((string)data ["path"]);
+					else if (data.ContainsKey ("name"))
+						requiredPaths.Add ((string)data ["name"]);
 					else
-						requiredPaths.Add(attachmentEntry.Key);
+						requiredPaths.Add (attachmentEntry.Key);
 					//requiredPaths.Add((string)sdf["path"]);
 				}
 			}
@@ -600,14 +621,16 @@ public class SpineEditorUtilities : AssetPostprocessor {
 
 		return requiredPaths;
 	}
-	static AtlasAsset GetMatchingAtlas (List<string> requiredPaths, List<AtlasAsset> atlasAssets) {
+
+	static AtlasAsset GetMatchingAtlas (List<string> requiredPaths, List<AtlasAsset> atlasAssets)
+	{
 		AtlasAsset atlasAssetMatch = null;
 
 		foreach (AtlasAsset a in atlasAssets) {
-			Atlas atlas = a.GetAtlas();
+			Atlas atlas = a.GetAtlas ();
 			bool failed = false;
 			foreach (string regionPath in requiredPaths) {
-				if (atlas.FindRegion(regionPath) == null) {
+				if (atlas.FindRegion (regionPath) == null) {
 					failed = true;
 					break;
 				}
@@ -623,20 +646,21 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		return atlasAssetMatch;
 	}
 
-	static List<AtlasAsset> FindAtlasesAtPath (string path) {
-		List<AtlasAsset> arr = new List<AtlasAsset>();
+	static List<AtlasAsset> FindAtlasesAtPath (string path)
+	{
+		List<AtlasAsset> arr = new List<AtlasAsset> ();
 
-		DirectoryInfo dir = new DirectoryInfo(path);
-		FileInfo[] assetInfoArr = dir.GetFiles("*.asset");
+		DirectoryInfo dir = new DirectoryInfo (path);
+		FileInfo[] assetInfoArr = dir.GetFiles ("*.asset");
 
 		int subLen = Application.dataPath.Length - 6;
 
 		foreach (var f in assetInfoArr) {
-			string assetRelativePath = f.FullName.Substring(subLen, f.FullName.Length - subLen).Replace("\\", "/");
+			string assetRelativePath = f.FullName.Substring (subLen, f.FullName.Length - subLen).Replace ("\\", "/");
 
-			Object obj = AssetDatabase.LoadAssetAtPath(assetRelativePath, typeof(AtlasAsset));
+			Object obj = AssetDatabase.LoadAssetAtPath (assetRelativePath, typeof(AtlasAsset));
 			if (obj != null) {
-				arr.Add(obj as AtlasAsset);
+				arr.Add (obj as AtlasAsset);
 			}
 
 		}
@@ -645,207 +669,236 @@ public class SpineEditorUtilities : AssetPostprocessor {
 		return arr;
 	}
 
-	public static bool IsValidSpineData (TextAsset asset) {
-		if (asset.name.Contains(".skel")) return true;
+	public static bool IsValidSpineData (TextAsset asset)
+	{
+		if (asset.name.Contains (".skel"))
+			return true;
 
 		object obj = null;
 		try {
-			obj = Json.Deserialize(new StringReader(asset.text));
+			obj = Json.Deserialize (new StringReader (asset.text));
 		} catch (System.Exception) {
 		}
 		if (obj == null) {
-			Debug.LogError("Is not valid JSON");
+			Debug.LogError ("Is not valid JSON");
 			return false;
 		}
 
 		Dictionary<string, object> root = (Dictionary<string, object>)obj;
 
-		if (!root.ContainsKey("skeleton"))
+		if (!root.ContainsKey ("skeleton"))
 			return false;
 
-		Dictionary<string, object> skeletonInfo = (Dictionary<string, object>)root["skeleton"];
+		Dictionary<string, object> skeletonInfo = (Dictionary<string, object>)root ["skeleton"];
 
-		string spineVersion = (string)skeletonInfo["spine"];
+		string spineVersion = (string)skeletonInfo ["spine"];
 		//TODO:  reject old versions
 
 		return true;
 	}
 
-	static AtlasAsset IngestSpineAtlas (TextAsset atlasText) {
+	static AtlasAsset IngestSpineAtlas (TextAsset atlasText)
+	{
 		if (atlasText == null) {
-			Debug.LogWarning("Atlas source cannot be null!");
+			Debug.LogWarning ("Atlas source cannot be null!");
 			return null;
 		}
 
-		string primaryName = Path.GetFileNameWithoutExtension(atlasText.name).Replace(".atlas", "");
-		string assetPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(atlasText));
+		string primaryName = Path.GetFileNameWithoutExtension (atlasText.name).Replace (".atlas", "");
+		string assetPath = Path.GetDirectoryName (AssetDatabase.GetAssetPath (atlasText));
 
 		string atlasPath = assetPath + "/" + primaryName + "_Atlas.asset";
 
-		AtlasAsset atlasAsset = (AtlasAsset)AssetDatabase.LoadAssetAtPath(atlasPath, typeof(AtlasAsset));
+		AtlasAsset atlasAsset = (AtlasAsset)AssetDatabase.LoadAssetAtPath (atlasPath, typeof(AtlasAsset));
 
-		List<Material> vestigialMaterials = new List<Material>();
+		List<Material> vestigialMaterials = new List<Material> ();
 
 		if (atlasAsset == null)
-			atlasAsset = AtlasAsset.CreateInstance<AtlasAsset>();
+			atlasAsset = AtlasAsset.CreateInstance<AtlasAsset> ();
 		else {
 			foreach (Material m in atlasAsset.materials)
-				vestigialMaterials.Add(m);
+				vestigialMaterials.Add (m);
 		}
 
 		atlasAsset.atlasFile = atlasText;
 
 		//strip CR
 		string atlasStr = atlasText.text;
-		atlasStr = atlasStr.Replace("\r", "");
+		atlasStr = atlasStr.Replace ("\r", "");
 
-		string[] atlasLines = atlasStr.Split('\n');
-		List<string> pageFiles = new List<string>();
+		string[] atlasLines = atlasStr.Split ('\n');
+		List<string> pageFiles = new List<string> ();
 		for (int i = 0; i < atlasLines.Length - 1; i++) {
-			if (atlasLines[i].Length == 0)
-				pageFiles.Add(atlasLines[i + 1]);
+			if (atlasLines [i].Length == 0)
+				pageFiles.Add (atlasLines [i + 1]);
 		}
 
 		atlasAsset.materials = new Material[pageFiles.Count];
 
+		//list of WebP textures
+		var webpList = new List<TextAsset> (pageFiles.Count);
+
 		for (int i = 0; i < pageFiles.Count; i++) {
-			string texturePath = assetPath + "/" + pageFiles[i];
-			Texture2D texture = (Texture2D)AssetDatabase.LoadAssetAtPath(texturePath, typeof(Texture2D));
+			Texture2D texture = null;
+			string texturePath = assetPath + "/" + pageFiles [i];
 
-			TextureImporter texImporter = (TextureImporter)TextureImporter.GetAtPath(texturePath);
-			texImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
-			texImporter.mipmapEnabled = false;
-			texImporter.alphaIsTransparency = false;
-			texImporter.maxTextureSize = 2048;
-
-			EditorUtility.SetDirty(texImporter);
-			AssetDatabase.ImportAsset(texturePath);
-			AssetDatabase.SaveAssets();
-
-			string pageName = Path.GetFileNameWithoutExtension(pageFiles[i]);
-
-			//because this looks silly
-			if (pageName == primaryName && pageFiles.Count == 1)
-				pageName = "Material";
-
-			string materialPath = assetPath + "/" + primaryName + "_" + pageName + ".mat";
-			Material mat = (Material)AssetDatabase.LoadAssetAtPath(materialPath, typeof(Material));
-
-			if (mat == null) {
-				mat = new Material(Shader.Find(defaultShader));
-				AssetDatabase.CreateAsset(mat, materialPath);
+			if (texturePath.EndsWith (".webp.bytes")) {
+				webpList.Add (AssetDatabase.LoadAssetAtPath (texturePath, typeof(TextAsset)) as TextAsset);
 			} else {
-				vestigialMaterials.Remove(mat);
+				texture = (Texture2D)AssetDatabase.LoadAssetAtPath (texturePath, typeof(Texture2D));
+
+				TextureImporter texImporter = (TextureImporter)TextureImporter.GetAtPath (texturePath);
+				texImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+				texImporter.mipmapEnabled = false;
+				texImporter.alphaIsTransparency = false;
+				texImporter.maxTextureSize = 2048;
+
+				EditorUtility.SetDirty (texImporter);
+				AssetDatabase.ImportAsset (texturePath);
+				AssetDatabase.SaveAssets ();
 			}
 
-			mat.mainTexture = texture;
-			EditorUtility.SetDirty(mat);
+			string pageName = Path.GetFileNameWithoutExtension (pageFiles [i]);
+			string materialName = string.Empty;
 
-			AssetDatabase.SaveAssets();
+			//because this looks silly
+			if (pageName == primaryName && pageFiles.Count == 1) {
+				pageName = "Material";
+			}
 
-			atlasAsset.materials[i] = mat;
+			if (texturePath.EndsWith (".webp.bytes")) {
+				materialName = Path.GetFileNameWithoutExtension (pageFiles [i]);
+			} else {
+				materialName = primaryName + "_" + pageName;
+			}
+
+			string materialPath = assetPath + "/" + materialName + ".mat";
+			Material mat = (Material)AssetDatabase.LoadAssetAtPath (materialPath, typeof(Material));
+
+			if (mat == null) {
+				mat = new Material (Shader.Find (defaultShader));
+				AssetDatabase.CreateAsset (mat, materialPath);
+			} else {
+				vestigialMaterials.Remove (mat);
+			}
+
+			if (texture) {
+				mat.mainTexture = texture;
+			}
+
+			EditorUtility.SetDirty (mat);
+			AssetDatabase.SaveAssets ();
+
+			atlasAsset.materials [i] = mat;
+		}
+
+		if (webpList.Count > 0) {
+			atlasAsset.webpTextures = webpList.ToArray ();
 		}
 
 		for (int i = 0; i < vestigialMaterials.Count; i++)
-			AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(vestigialMaterials[i]));
+			AssetDatabase.DeleteAsset (AssetDatabase.GetAssetPath (vestigialMaterials [i]));
 
-		if (AssetDatabase.GetAssetPath(atlasAsset) == "")
-			AssetDatabase.CreateAsset(atlasAsset, atlasPath);
+		if (AssetDatabase.GetAssetPath (atlasAsset) == "")
+			AssetDatabase.CreateAsset (atlasAsset, atlasPath);
 		else
-			atlasAsset.Reset();
+			atlasAsset.Reset ();
 
-		EditorUtility.SetDirty(atlasAsset);
+		EditorUtility.SetDirty (atlasAsset);
 
-		AssetDatabase.SaveAssets();
+		AssetDatabase.SaveAssets ();
 
 
 		//iterate regions and bake marked
-		Atlas atlas = atlasAsset.GetAtlas();
-		FieldInfo field = typeof(Atlas).GetField("regions", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.NonPublic);
-		List<AtlasRegion> regions = (List<AtlasRegion>)field.GetValue(atlas);
-		string atlasAssetPath = AssetDatabase.GetAssetPath(atlasAsset);
-		string atlasAssetDirPath = Path.GetDirectoryName(atlasAssetPath);
-		string bakedDirPath = Path.Combine(atlasAssetDirPath, atlasAsset.name);
+		Atlas atlas = atlasAsset.GetAtlas ();
+		FieldInfo field = typeof(Atlas).GetField ("regions", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.NonPublic);
+		List<AtlasRegion> regions = (List<AtlasRegion>)field.GetValue (atlas);
+		string atlasAssetPath = AssetDatabase.GetAssetPath (atlasAsset);
+		string atlasAssetDirPath = Path.GetDirectoryName (atlasAssetPath);
+		string bakedDirPath = Path.Combine (atlasAssetDirPath, atlasAsset.name);
 
 		bool hasBakedRegions = false;
 		for (int i = 0; i < regions.Count; i++) {
-			AtlasRegion region = regions[i];
-			string bakedPrefabPath = Path.Combine(bakedDirPath, SpineEditorUtilities.GetPathSafeRegionName(region) + ".prefab").Replace("\\", "/");
-			GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath(bakedPrefabPath, typeof(GameObject));
+			AtlasRegion region = regions [i];
+			string bakedPrefabPath = Path.Combine (bakedDirPath, SpineEditorUtilities.GetPathSafeRegionName (region) + ".prefab").Replace ("\\", "/");
+			GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath (bakedPrefabPath, typeof(GameObject));
 
 			if (prefab != null) {
-				BakeRegion(atlasAsset, region, false);
+				BakeRegion (atlasAsset, region, false);
 				hasBakedRegions = true;
 			}
 		}
 
 		if (hasBakedRegions) {
-			AssetDatabase.SaveAssets();
-			AssetDatabase.Refresh();
+			AssetDatabase.SaveAssets ();
+			AssetDatabase.Refresh ();
 		}
 
-		return (AtlasAsset)AssetDatabase.LoadAssetAtPath(atlasPath, typeof(AtlasAsset));
+		return (AtlasAsset)AssetDatabase.LoadAssetAtPath (atlasPath, typeof(AtlasAsset));
 	}
 
-	public static GameObject BakeRegion (AtlasAsset atlasAsset, AtlasRegion region, bool autoSave = true) {
-		Atlas atlas = atlasAsset.GetAtlas();
-		string atlasAssetPath = AssetDatabase.GetAssetPath(atlasAsset);
-		string atlasAssetDirPath = Path.GetDirectoryName(atlasAssetPath);
-		string bakedDirPath = Path.Combine(atlasAssetDirPath, atlasAsset.name);
-		string bakedPrefabPath = Path.Combine(bakedDirPath, GetPathSafeRegionName(region) + ".prefab").Replace("\\", "/");
+	public static GameObject BakeRegion (AtlasAsset atlasAsset, AtlasRegion region, bool autoSave = true)
+	{
+		Atlas atlas = atlasAsset.GetAtlas ();
+		string atlasAssetPath = AssetDatabase.GetAssetPath (atlasAsset);
+		string atlasAssetDirPath = Path.GetDirectoryName (atlasAssetPath);
+		string bakedDirPath = Path.Combine (atlasAssetDirPath, atlasAsset.name);
+		string bakedPrefabPath = Path.Combine (bakedDirPath, GetPathSafeRegionName (region) + ".prefab").Replace ("\\", "/");
 
-		GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath(bakedPrefabPath, typeof(GameObject));
+		GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath (bakedPrefabPath, typeof(GameObject));
 		GameObject root;
 		Mesh mesh;
 		bool isNewPrefab = false;
 
-		if (!Directory.Exists(bakedDirPath))
-			Directory.CreateDirectory(bakedDirPath);
+		if (!Directory.Exists (bakedDirPath))
+			Directory.CreateDirectory (bakedDirPath);
 
 		if (prefab == null) {
-			root = new GameObject("temp", typeof(MeshFilter), typeof(MeshRenderer));
-			prefab = (GameObject)PrefabUtility.CreatePrefab(bakedPrefabPath, root);
+			root = new GameObject ("temp", typeof(MeshFilter), typeof(MeshRenderer));
+			prefab = (GameObject)PrefabUtility.CreatePrefab (bakedPrefabPath, root);
 			isNewPrefab = true;
-			Object.DestroyImmediate(root);
+			Object.DestroyImmediate (root);
 		}
 
-		mesh = (Mesh)AssetDatabase.LoadAssetAtPath(bakedPrefabPath, typeof(Mesh));		
+		mesh = (Mesh)AssetDatabase.LoadAssetAtPath (bakedPrefabPath, typeof(Mesh));		
 
 		Material mat = null;
-		mesh = atlasAsset.GenerateMesh(region.name, mesh, out mat);
+		mesh = atlasAsset.GenerateMesh (region.name, mesh, out mat);
 		if (isNewPrefab) {
-			AssetDatabase.AddObjectToAsset(mesh, prefab);
-			prefab.GetComponent<MeshFilter>().sharedMesh = mesh;
+			AssetDatabase.AddObjectToAsset (mesh, prefab);
+			prefab.GetComponent<MeshFilter> ().sharedMesh = mesh;
 		}
 
-		EditorUtility.SetDirty(mesh);
-		EditorUtility.SetDirty(prefab);
+		EditorUtility.SetDirty (mesh);
+		EditorUtility.SetDirty (prefab);
 
 		if (autoSave) {
-			AssetDatabase.SaveAssets();
-			AssetDatabase.Refresh();
+			AssetDatabase.SaveAssets ();
+			AssetDatabase.Refresh ();
 		}
 		
 
-		prefab.GetComponent<MeshRenderer>().sharedMaterial = mat;
+		prefab.GetComponent<MeshRenderer> ().sharedMaterial = mat;
 
 		return prefab;
 	}
 
-	public static string GetPathSafeRegionName (AtlasRegion region) {
-		return region.name.Replace("/", "_");
+	public static string GetPathSafeRegionName (AtlasRegion region)
+	{
+		return region.name.Replace ("/", "_");
 	}
 
-	static SkeletonDataAsset IngestSpineProject (TextAsset spineJson, params AtlasAsset[] atlasAssets) {
-		string primaryName = Path.GetFileNameWithoutExtension(spineJson.name);
-		string assetPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(spineJson));
+	static SkeletonDataAsset IngestSpineProject (TextAsset spineJson, params AtlasAsset[] atlasAssets)
+	{
+		string primaryName = Path.GetFileNameWithoutExtension (spineJson.name);
+		string assetPath = Path.GetDirectoryName (AssetDatabase.GetAssetPath (spineJson));
 		string filePath = assetPath + "/" + primaryName + "_SkeletonData.asset";
 
 		if (spineJson != null && atlasAssets != null) {
 
-			SkeletonDataAsset skelDataAsset = (SkeletonDataAsset)AssetDatabase.LoadAssetAtPath(filePath, typeof(SkeletonDataAsset));
+			SkeletonDataAsset skelDataAsset = (SkeletonDataAsset)AssetDatabase.LoadAssetAtPath (filePath, typeof(SkeletonDataAsset));
 			if (skelDataAsset == null) {
-				skelDataAsset = SkeletonDataAsset.CreateInstance<SkeletonDataAsset>();
+				skelDataAsset = SkeletonDataAsset.CreateInstance<SkeletonDataAsset> ();
 				skelDataAsset.atlasAssets = atlasAssets;
 				skelDataAsset.skeletonJSON = spineJson;
 				skelDataAsset.fromAnimation = new string[0];
@@ -854,62 +907,70 @@ public class SpineEditorUtilities : AssetPostprocessor {
 				skelDataAsset.defaultMix = defaultMix;
 				skelDataAsset.scale = defaultScale;
 
-				AssetDatabase.CreateAsset(skelDataAsset, filePath);
-				AssetDatabase.SaveAssets();
+				AssetDatabase.CreateAsset (skelDataAsset, filePath);
+				AssetDatabase.SaveAssets ();
 			} else {
 				skelDataAsset.atlasAssets = atlasAssets;
-				skelDataAsset.Reset();
-				skelDataAsset.GetSkeletonData(true);
+				skelDataAsset.Reset ();
+				skelDataAsset.GetSkeletonData (true);
 			}
 
 			return skelDataAsset;
 		} else {
-			EditorUtility.DisplayDialog("Error!", "Must specify both Spine JSON and AtlasAsset array", "OK");
+			EditorUtility.DisplayDialog ("Error!", "Must specify both Spine JSON and AtlasAsset array", "OK");
 			return null;
 		}
 	}
 
-	[MenuItem("Assets/Spine/Instantiate (SkeletonAnimation)")]
-	static void InstantiateSkeletonAnimation () {
+	[MenuItem ("Assets/Spine/Instantiate (SkeletonAnimation)")]
+	static void InstantiateSkeletonAnimation ()
+	{
 		Object[] arr = Selection.objects;
 		foreach (Object o in arr) {
-			string guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(o));
-			string skinName = EditorPrefs.GetString(guid + "_lastSkin", "");
-
-			InstantiateSkeletonAnimation((SkeletonDataAsset)o, skinName);
-			SceneView.RepaintAll();
+			string guid = AssetDatabase.AssetPathToGUID (AssetDatabase.GetAssetPath (o));
+			string skinName = EditorPrefs.GetString (guid + "_lastSkin", "");
+			SkeletonDataAsset sdAsset = (SkeletonDataAsset)o;
+			var skelAnim = InstantiateSkeletonAnimation (sdAsset, skinName);
+			if (skelAnim) {
+				var webp = skelAnim.gameObject.AddComponent<WebPLoader> ();
+				webp.atlasAssets = sdAsset.atlasAssets;
+			}
+			SceneView.RepaintAll ();
 		}
 	}
 
-	[MenuItem("Assets/Spine/Instantiate (SkeletonAnimation)", true)]
-	static bool ValidateInstantiateSkeletonAnimation () {
+	[MenuItem ("Assets/Spine/Instantiate (SkeletonAnimation)", true)]
+	static bool ValidateInstantiateSkeletonAnimation ()
+	{
 		Object[] arr = Selection.objects;
 
 		if (arr.Length == 0)
 			return false;
 
 		foreach (Object o in arr) {
-			if (o.GetType() != typeof(SkeletonDataAsset))
+			if (o.GetType () != typeof(SkeletonDataAsset))
 				return false;
 		}
 
 		return true;
 	}
 
-	public static SkeletonAnimation InstantiateSkeletonAnimation (SkeletonDataAsset skeletonDataAsset, string skinName) {
-		return InstantiateSkeletonAnimation(skeletonDataAsset, skeletonDataAsset.GetSkeletonData(true).FindSkin(skinName));
+	public static SkeletonAnimation InstantiateSkeletonAnimation (SkeletonDataAsset skeletonDataAsset, string skinName)
+	{
+		return InstantiateSkeletonAnimation (skeletonDataAsset, skeletonDataAsset.GetSkeletonData (true).FindSkin (skinName));
 	}
 
-	public static SkeletonAnimation InstantiateSkeletonAnimation (SkeletonDataAsset skeletonDataAsset, Skin skin = null) {
-		GameObject go = new GameObject(skeletonDataAsset.name.Replace("_SkeletonData", ""), typeof(MeshFilter), typeof(MeshRenderer), typeof(SkeletonAnimation));
-		SkeletonAnimation anim = go.GetComponent<SkeletonAnimation>();
+	public static SkeletonAnimation InstantiateSkeletonAnimation (SkeletonDataAsset skeletonDataAsset, Skin skin = null)
+	{
+		GameObject go = new GameObject (skeletonDataAsset.name.Replace ("_SkeletonData", ""), typeof(MeshFilter), typeof(MeshRenderer), typeof(SkeletonAnimation));
+		SkeletonAnimation anim = go.GetComponent<SkeletonAnimation> ();
 		anim.skeletonDataAsset = skeletonDataAsset;
 
 		bool requiresNormals = false;
 
 		foreach (AtlasAsset atlasAsset in anim.skeletonDataAsset.atlasAssets) {
 			foreach (Material m in atlasAsset.materials) {
-				if (m.shader.name.Contains("Lit")) {
+				if (m.shader.name.Contains ("Lit")) {
 					requiresNormals = true;
 					break;
 				}
@@ -920,84 +981,93 @@ public class SpineEditorUtilities : AssetPostprocessor {
 
 		anim.calculateNormals = requiresNormals;
 
-		SkeletonData data = skeletonDataAsset.GetSkeletonData(true);
+		SkeletonData data = skeletonDataAsset.GetSkeletonData (true);
 
 		if (data == null) {
 			for (int i = 0; i < skeletonDataAsset.atlasAssets.Length; i++) {
-				string reloadAtlasPath = AssetDatabase.GetAssetPath(skeletonDataAsset.atlasAssets[i]);
-				skeletonDataAsset.atlasAssets[i] = (AtlasAsset)AssetDatabase.LoadAssetAtPath(reloadAtlasPath, typeof(AtlasAsset));
+				string reloadAtlasPath = AssetDatabase.GetAssetPath (skeletonDataAsset.atlasAssets [i]);
+				skeletonDataAsset.atlasAssets [i] = (AtlasAsset)AssetDatabase.LoadAssetAtPath (reloadAtlasPath, typeof(AtlasAsset));
 			}
 
-			data = skeletonDataAsset.GetSkeletonData(true);
+			data = skeletonDataAsset.GetSkeletonData (true);
 		}
 
 		if (skin == null)
 			skin = data.DefaultSkin;
 
 		if (skin == null)
-			skin = data.Skins[0];
+			skin = data.Skins [0];
 
-		anim.Reset();
+		anim.Reset ();
 
-		anim.skeleton.SetSkin(skin);
+		anim.skeleton.SetSkin (skin);
 		anim.initialSkinName = skin.Name;
 
-		anim.skeleton.Update(1);
-		anim.state.Update(1);
-		anim.state.Apply(anim.skeleton);
-		anim.skeleton.UpdateWorldTransform();
+		anim.skeleton.Update (1);
+		anim.state.Update (1);
+		anim.state.Apply (anim.skeleton);
+		anim.skeleton.UpdateWorldTransform ();
 
 		return anim;
 	}
 
-	[MenuItem("Assets/Spine/Instantiate (Mecanim)")]
-	static void InstantiateSkeletonAnimator () {
+	[MenuItem ("Assets/Spine/Instantiate (Mecanim)")]
+	static void InstantiateSkeletonAnimator ()
+	{
 		Object[] arr = Selection.objects;
 		foreach (Object o in arr) {
-			string guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(o));
-			string skinName = EditorPrefs.GetString(guid + "_lastSkin", "");
+			string guid = AssetDatabase.AssetPathToGUID (AssetDatabase.GetAssetPath (o));
+			string skinName = EditorPrefs.GetString (guid + "_lastSkin", "");
+			var sdAsset = (SkeletonDataAsset)o;
 
-			InstantiateSkeletonAnimator((SkeletonDataAsset)o, skinName);
-			SceneView.RepaintAll();
+			var animator = InstantiateSkeletonAnimator (sdAsset, skinName);
+			if (animator) {
+				var loader = animator.gameObject.AddComponent<WebPLoader> ();
+				loader.atlasAssets = sdAsset.atlasAssets;
+			}
+			SceneView.RepaintAll ();
 		}
 	}
 
-	[MenuItem("Assets/Spine/Instantiate (SkeletonAnimation)", true)]
-	static bool ValidateInstantiateSkeletonAnimator () {
+	[MenuItem ("Assets/Spine/Instantiate (SkeletonAnimation)", true)]
+	static bool ValidateInstantiateSkeletonAnimator ()
+	{
 		Object[] arr = Selection.objects;
 
 		if (arr.Length == 0)
 			return false;
 
 		foreach (Object o in arr) {
-			if (o.GetType() != typeof(SkeletonDataAsset))
+			if (o.GetType () != typeof(SkeletonDataAsset))
 				return false;
 		}
 
 		return true;
 	}
 
-	public static SkeletonAnimator InstantiateSkeletonAnimator (SkeletonDataAsset skeletonDataAsset, string skinName) {
-		return InstantiateSkeletonAnimator(skeletonDataAsset, skeletonDataAsset.GetSkeletonData(true).FindSkin(skinName));
+	public static SkeletonAnimator InstantiateSkeletonAnimator (SkeletonDataAsset skeletonDataAsset, string skinName)
+	{
+		return InstantiateSkeletonAnimator (skeletonDataAsset, skeletonDataAsset.GetSkeletonData (true).FindSkin (skinName));
 	}
 
-	public static SkeletonAnimator InstantiateSkeletonAnimator (SkeletonDataAsset skeletonDataAsset, Skin skin = null) {
-		GameObject go = new GameObject(skeletonDataAsset.name.Replace("_SkeletonData", ""), typeof(MeshFilter), typeof(MeshRenderer), typeof(Animator), typeof(SkeletonAnimator));
+	public static SkeletonAnimator InstantiateSkeletonAnimator (SkeletonDataAsset skeletonDataAsset, Skin skin = null)
+	{
+		GameObject go = new GameObject (skeletonDataAsset.name.Replace ("_SkeletonData", ""), typeof(MeshFilter), typeof(MeshRenderer), typeof(Animator), typeof(SkeletonAnimator));
 
 		if (skeletonDataAsset.controller == null) {
-			SkeletonBaker.GenerateMecanimAnimationClips(skeletonDataAsset);
+			SkeletonBaker.GenerateMecanimAnimationClips (skeletonDataAsset);
 		}
 
-		go.GetComponent<Animator>().runtimeAnimatorController = skeletonDataAsset.controller;
+		go.GetComponent<Animator> ().runtimeAnimatorController = skeletonDataAsset.controller;
 
-		SkeletonAnimator anim = go.GetComponent<SkeletonAnimator>();
+		SkeletonAnimator anim = go.GetComponent<SkeletonAnimator> ();
 		anim.skeletonDataAsset = skeletonDataAsset;
 
 		bool requiresNormals = false;
 
 		foreach (AtlasAsset atlasAsset in anim.skeletonDataAsset.atlasAssets) {
 			foreach (Material m in atlasAsset.materials) {
-				if (m.shader.name.Contains("Lit")) {
+				if (m.shader.name.Contains ("Lit")) {
 					requiresNormals = true;
 					break;
 				}
@@ -1006,109 +1076,112 @@ public class SpineEditorUtilities : AssetPostprocessor {
 
 		anim.calculateNormals = requiresNormals;
 
-		SkeletonData data = skeletonDataAsset.GetSkeletonData(true);
+		SkeletonData data = skeletonDataAsset.GetSkeletonData (true);
 
 		if (data == null) {
 			for (int i = 0; i < skeletonDataAsset.atlasAssets.Length; i++) {
-				string reloadAtlasPath = AssetDatabase.GetAssetPath(skeletonDataAsset.atlasAssets[i]);
-				skeletonDataAsset.atlasAssets[i] = (AtlasAsset)AssetDatabase.LoadAssetAtPath(reloadAtlasPath, typeof(AtlasAsset));
+				string reloadAtlasPath = AssetDatabase.GetAssetPath (skeletonDataAsset.atlasAssets [i]);
+				skeletonDataAsset.atlasAssets [i] = (AtlasAsset)AssetDatabase.LoadAssetAtPath (reloadAtlasPath, typeof(AtlasAsset));
 			}
 
-			data = skeletonDataAsset.GetSkeletonData(true);
+			data = skeletonDataAsset.GetSkeletonData (true);
 		}
 
 		if (skin == null)
 			skin = data.DefaultSkin;
 
 		if (skin == null)
-			skin = data.Skins[0];
+			skin = data.Skins [0];
 
-		anim.Reset();
+		anim.Reset ();
 
-		anim.skeleton.SetSkin(skin);
+		anim.skeleton.SetSkin (skin);
 		anim.initialSkinName = skin.Name;
 
-		anim.skeleton.Update(1);
-		anim.skeleton.UpdateWorldTransform();
-		anim.LateUpdate();
+		anim.skeleton.Update (1);
+		anim.skeleton.UpdateWorldTransform ();
+		anim.LateUpdate ();
 
 		return anim;
 	}
 
 	static bool preferencesLoaded = false;
 
-	[PreferenceItem("Spine")]
-	static void PreferencesGUI () {
+	[PreferenceItem ("Spine")]
+	static void PreferencesGUI ()
+	{
 		if (!preferencesLoaded) {
 			preferencesLoaded = true;
-			defaultMix = EditorPrefs.GetFloat(DEFAULT_MIX_KEY, 0.2f);
+			defaultMix = EditorPrefs.GetFloat (DEFAULT_MIX_KEY, 0.2f);
 		}
 
 
-		EditorGUILayout.LabelField("Auto-Import Settings", EditorStyles.boldLabel);
-		EditorGUI.BeginChangeCheck();
-		defaultMix = EditorGUILayout.FloatField("Default Mix", defaultMix);
-		if (EditorGUI.EndChangeCheck())
-			EditorPrefs.SetFloat(DEFAULT_MIX_KEY, defaultMix);
+		EditorGUILayout.LabelField ("Auto-Import Settings", EditorStyles.boldLabel);
+		EditorGUI.BeginChangeCheck ();
+		defaultMix = EditorGUILayout.FloatField ("Default Mix", defaultMix);
+		if (EditorGUI.EndChangeCheck ())
+			EditorPrefs.SetFloat (DEFAULT_MIX_KEY, defaultMix);
 
-		GUILayout.Space(20);
-		EditorGUILayout.LabelField("3rd Party Settings", EditorStyles.boldLabel);
-		GUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("TK2D");
+		GUILayout.Space (20);
+		EditorGUILayout.LabelField ("3rd Party Settings", EditorStyles.boldLabel);
+		GUILayout.BeginHorizontal ();
+		EditorGUILayout.PrefixLabel ("TK2D");
 
-		if (GUILayout.Button("Enable", GUILayout.Width(64)))
-			EnableTK2D();
-		if (GUILayout.Button("Disable", GUILayout.Width(64)))
-			DisableTK2D();
-		GUILayout.EndHorizontal();
+		if (GUILayout.Button ("Enable", GUILayout.Width (64)))
+			EnableTK2D ();
+		if (GUILayout.Button ("Disable", GUILayout.Width (64)))
+			DisableTK2D ();
+		GUILayout.EndHorizontal ();
 	}
 
 
 	//TK2D Support
 	const string SPINE_TK2D_DEFINE = "SPINE_TK2D";
 
-	static void EnableTK2D () {
+	static void EnableTK2D ()
+	{
 		bool added = false;
 		foreach (BuildTargetGroup group in System.Enum.GetValues(typeof(BuildTargetGroup))) {
-			string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
-			if (!defines.Contains(SPINE_TK2D_DEFINE)) {
+			string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup (group);
+			if (!defines.Contains (SPINE_TK2D_DEFINE)) {
 				added = true;
-				if (defines.EndsWith(";"))
+				if (defines.EndsWith (";"))
 					defines = defines + SPINE_TK2D_DEFINE;
 				else
 					defines = defines + ";" + SPINE_TK2D_DEFINE;
 
-				PlayerSettings.SetScriptingDefineSymbolsForGroup(group, defines);
+				PlayerSettings.SetScriptingDefineSymbolsForGroup (group, defines);
 			}
 		}
 
 		if (added) {
-			Debug.LogWarning("Setting Scripting Define Symbol " + SPINE_TK2D_DEFINE);
+			Debug.LogWarning ("Setting Scripting Define Symbol " + SPINE_TK2D_DEFINE);
 		} else {
-			Debug.LogWarning("Already Set Scripting Define Symbol " + SPINE_TK2D_DEFINE);
+			Debug.LogWarning ("Already Set Scripting Define Symbol " + SPINE_TK2D_DEFINE);
 		}
 	}
 
 
-	static void DisableTK2D () {
+	static void DisableTK2D ()
+	{
 		bool removed = false;
 		foreach (BuildTargetGroup group in System.Enum.GetValues(typeof(BuildTargetGroup))) {
-			string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
-			if (defines.Contains(SPINE_TK2D_DEFINE)) {
+			string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup (group);
+			if (defines.Contains (SPINE_TK2D_DEFINE)) {
 				removed = true;
-				if (defines.Contains(SPINE_TK2D_DEFINE + ";"))
-					defines = defines.Replace(SPINE_TK2D_DEFINE + ";", "");
+				if (defines.Contains (SPINE_TK2D_DEFINE + ";"))
+					defines = defines.Replace (SPINE_TK2D_DEFINE + ";", "");
 				else
-					defines = defines.Replace(SPINE_TK2D_DEFINE, "");
+					defines = defines.Replace (SPINE_TK2D_DEFINE, "");
 
-				PlayerSettings.SetScriptingDefineSymbolsForGroup(group, defines);
+				PlayerSettings.SetScriptingDefineSymbolsForGroup (group, defines);
 			}
 		}
 
 		if (removed) {
-			Debug.LogWarning("Removing Scripting Define Symbol " + SPINE_TK2D_DEFINE);
+			Debug.LogWarning ("Removing Scripting Define Symbol " + SPINE_TK2D_DEFINE);
 		} else {
-			Debug.LogWarning("Already Removed Scripting Define Symbol " + SPINE_TK2D_DEFINE);
+			Debug.LogWarning ("Already Removed Scripting Define Symbol " + SPINE_TK2D_DEFINE);
 		}
 	}
 
